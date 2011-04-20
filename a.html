@@ -1,0 +1,40 @@
+<html>
+<body>
+<form>
+<div onkeyup="s(this)" onclick="s(this)" id="myDiv">This is some
+text</div>
+<input type="text" onkeyup="s(this)" onclick="s(this)" value="This is
+some text">
+</form>
+<script type="text/javascript">
+function s(el)
+{
+var sel, rng, r2, i=-1;
+
+//firefox
+if(typeof el.selectionStart=="number")
+{
+i=el.selectionStart;
+}
+//ie
+else if(document.selection && el.createTextRange)
+{
+sel=document.selection;
+if(sel)
+{
+r2=sel.createRange();
+rng=el.createTextRange();
+rng.setEndPoint("EndToStart", r2);
+i=rng.text.length;
+}
+}
+else
+{
+el.onkeyup=null;
+el.onclick=null;
+}
+alert(i)
+}
+</script>
+</body>
+</html>
