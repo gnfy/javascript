@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Snake</title>
+        <meta charset='utf-8'/>
+        <style type="text/css">
+            .place {
+                margin:auto;
+                width:500px;
+                height:500px;
+                position:relative;
+                background-color:#ddd;
+                border:1px solid #F00;
+                overflow:hidden;
+                autofocus:true;
+            }
+            #snake {
+                width:20px;
+                height:20px;
+                position:absolute;
+                background-color:#0B0;
+                top:40px;
+                left:40px;
+            }
+            #food {
+                width:20px;
+                height:20px;
+                position:absolute;
+                top:40px;
+                left:40px;
+            }
+        </style>
+        <script type="text/javascript" src="snake.js"></script>
+    </head>
+    <body>
+        <div style="text-align:center;margin-bottom:10px;">
+            <div><input type="button" onclick="snake.run()" id="btn" value=" start " /></div>
+            <div>当前获得分数：<span id="scores">0</span>&nbsp;&nbsp;当前级别分数：<span id="level">0</span></div>
+        </div>
+        <div class="place">
+            <div id="snake"></div>
+            <div id="food"></div>
+        </div>
+    </body>
+</html>
