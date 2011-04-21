@@ -126,6 +126,7 @@ document.onkeydown = function () {
     var evt = window.event ? window.event : arguments[0];
     var k   = evt.keyCode;
     if (k >= 37 && k <= 40 && last_key != k && Math.abs(last_key - k) != 2) {
+        // 停下来，才能更好的前进
         pause();
         t_step      = step[k].t_step;
         l_step      = step[k].l_step;
