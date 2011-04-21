@@ -60,7 +60,7 @@ var move = function () {
     if (s_dom == 0) {
         s_dom = G('snake');
         s_dom.style.top     = '40px';
-        s_dom.style.left    = '40px'
+        s_dom.style.left    = '40px';
     }
     // 初始化食物
     if (f_dom == 0) {
@@ -87,17 +87,22 @@ var move = function () {
                 body_dom.style.left = snake_pos[i][1] + 'px';
             }
         }
-
+        var is_true = 1;
         // 判断蛇头位置是否合法
-        snake_check([t_n_val, l_n_val]);
-
-        s_dom.style.top     = t_n_val + 'px';
-        s_dom.style.left    = l_n_val + 'px';
-        if (t_n_val == f_top && l_n_val == f_left) {
-            // 吃食物
-            snake_eat();
+        if (snake_len > 1) {
+           is_true = snake_check([t_n_val, l_n_val]);
         }
-        timer = setTimeout(move, time_step);
+        if (is_true == 1) {
+            s_dom.style.top     = t_n_val + 'px';
+            s_dom.style.left    = l_n_val + 'px';
+            if (t_n_val == f_top && l_n_val == f_left) {
+                // 吃食物
+                snake_eat();
+            }
+            timer = setTimeout(move, time_step);
+        } else {
+            restart();
+        }
     } else {
         restart();
     }
@@ -110,6 +115,7 @@ var pause = function () {
         btn_dom = G('btn');
     }
     btn_dom.value = ' start ';
+    is_run = 1;
     clearTimeout(timer);
     //clearInterval(timer);
 }
@@ -124,7 +130,6 @@ document.onkeydown = function () {
         t_step      = step[k].t_step;
         l_step      = step[k].l_step;
         last_key    = k;
-        //timer = setInterval(move, time_step);
         move();
     } else if (Math.abs(last_key - k) == 2) {   // 反方向暂停
         pause();
@@ -177,12 +182,14 @@ var snake_eat = function() {
  * @param   array   param   蛇头位置的数组
  */
 var snake_check = function(param) {
+    var is_true = 1;
     for (var i in snake_pos) {
         if (snake_pos[i].toString() == param.toString()) {
-            restart();
+            is_true = 2;
             break;
         }
     }
+    return is_true;
 }
 /**
  * 重新开始
@@ -199,18 +206,23 @@ var restart = function() {
             var body_dom = G('snake'+i);
             p_dom.removeChild(body_dom);
         }
-        snake_len   = 0;
-        t_step      = 0,
-        l_step      = 0,
-        time_step   = 400,
-        last_key    = 0;
-        is_run      = 1;
-        snake_pos   = new Array();
         s_dom.style.top     = '40px';
         s_dom.style.left    = '40px';
 
         // 重构食物
         food_reload();
+        
+        sum_scores          = 0;
+        snake_len           = 0;
+        t_step              = 0;
+        l_step              = 0;
+        time_step           = 400;
+        last_key            = 0;
+        is_run              = 1;
+        snake_pos           = new Array();
+
+        // 重构分数
+        scores_count();
     }
 
 }
