@@ -1,0 +1,25 @@
+﻿<script type="text/javascript">
+    // 正序
+    function sort_asc(x, y) {
+        return x - y;
+    }
+    // 倒序
+    function sort_desc(x, y) {
+        return y - x;
+    }
+    // 随机
+    function sort_rand(x, y) {
+        return Math.round(Math.random() * 8 - 4);
+    }
+    function sort_rand2() {
+        return Math.random()>0.5?-1:1;
+    }
+    var arr = [1,6,3,10]
+    alert(arr.sort(sort_asc));
+    alert(arr.sort(sort_desc));
+    alert(arr.sort(sort_rand2));
+    var Arr1=[1,2,3,4,5,6,7,8,9,10,22,33,55,77,88,99];  
+    //Arr1.sort(function(){return Math.random()>0.5?-1:1;});  
+    Arr1.sort(sort_rand2);
+    alert(Arr1);  
+</script>
