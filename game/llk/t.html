@@ -1,0 +1,24 @@
+<script>
+    var getRand = function (min, max) {
+        return parseInt(Math.random() * (max - min) + min);
+    }
+    var i = 0;
+    if (i !== false) {
+        alert('OK');
+    }
+    while (true) {
+        var r = getRand(0, 4);
+        if (r == 2) {
+            i = 100;
+        }
+        if (i == 100) {
+            break;
+        }
+        i++;
+    }
+    var a = [1, 2, 3, 4];
+    var b = a + ''; 
+    alert(b.split('1')[0].split(',').length);
+    var c = 11;
+    alert(a.toString().indexOf(c));
+</script>
