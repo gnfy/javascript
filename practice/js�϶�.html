@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+            var t = 2;
+            function show(val) {
+                t = val;
+            }
+            function move(dom) {
+                var is_true = 1;
+                if (t == 1) {
+                    var evt = window.event || arguments[0];
+                    dom.style.top = (evt.clientY - 20) + 'px';
+                    dom.style.left = (evt.clientX - 20) + 'px';
+                    if (evt.clientY >= 80 && evt.clientY <= 140 && evt.clientX >= 80 && evt.clientX <= 140) {
+                        is_true = 2;
+                    }
+                }
+                if (is_true == 2) {
+                    document.getElementById('r').innerHTML = evt.clientY + ', ' + evt.clientX + ', OK, attr=' + document.getElementById('s').getAttribute('attr');
+                } else {
+                    document.getElementById('r').innerHTML = evt.clientY + ', ' + evt.clientX;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div style="border:1px solid red;width:40px;height:40px;cursor:move;position:absolute;z-index:1" onmousedown="show(1)" onmouseup="show(2)" onmousemove="move(this)"></div>
+        <div style="border:1px solid red;width:60px;height:60px;position:absolute;top:80px;left:80px;" id="s" attr="a"></div>
+        <div style="border:1px solid red;position:absolute;top:180px;height:20px;width:180px;" id="r"></div>
+    </body>
+</html>
