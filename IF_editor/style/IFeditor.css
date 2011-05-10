@@ -1,0 +1,39 @@
+.b_d{border:1px solid #ddd}
+.f_l{float:left;}
+.f_r{float:right;}
+.act_bg{background-color:#99CCFF}
+.content{width:100%;height:400px;}
+.toolbar{background-color:#eee;height:30px;}
+.toolbar span{width:16px;height:16px;text-align:center;cursor:pointer;background-image:url('../images/icon.png');background-repeat:no-repeat;display:inline-block;background-position:100px;margin:6px 0px 6px 0px;font-size:12px;}
+.toolbar .IF_btn_disable{filter:alpha(opacity=30);opacity:.3;}
+.toolbar .IF_btn_orgin{filter:alpha(opacity=70);opacity:.7;}
+.toolbar .IF_btn_undo{background-position:0 -208px}
+.toolbar .IF_btn_undo_on{background-position:0 -208px}
+.toolbar .IF_btn_redo{background-position:0 -224px}
+.toolbar .IF_btn_redo_on{background-position:0 -224px}
+.toolbar .IF_btn_bold{background-position:0 -304px}
+.toolbar .IF_btn_bold_on{background-position:0 -304px;}
+.toolbar .IF_btn_italic{background-position:0 -320px}
+.toolbar .IF_btn_italic_on{background-position:0 -320px}
+.toolbar .IF_btn_under{background-position:0 -336px}
+.toolbar .IF_btn_under_on{background-position:0 -336px}
+.toolbar .IF_btn_strk{background-position:0 -352px}
+.toolbar .IF_btn_strk_on{background-position:0 -352px}
+.toolbar .IF_btn_orderlist{background-position:0 -400px}
+.toolbar .IF_btn_orderlist_on{background-position:0 -400px}
+.toolbar .IF_btn_unorderlist{background-position:0 -416px}
+.toolbar .IF_btn_unorderlist_on{background-position:0 -416px}
+.toolbar .IF_btn_link{background-position:0 -528px}
+.toolbar .IF_btn_link_on{background-position:0 -528px}
+.toolbar .IF_btn_unlink{background-position:0 -544px}
+.toolbar .IF_btn_unlink_on{background-position:0 -544px}
+.toolbar .IF_btn_img{background-position:0 -576px}
+.toolbar .IF_btn_img_on{background-position:0 -576px}
+.toolbar .IF_btn_flash{background-position:0 -592px}
+.toolbar .IF_btn_flash_on{background-position:0 -592px}
+.toolbar .IF_btn_spe{background-position:0 -656px}
+.toolbar .IF_btn_spe_on{background-position:0 -656px}
+.toolbar .IF_btn_h1{background-position:0 -1215px}
+.toolbar .IF_btn_h1_on{background-position:0 -1215px}
+.toolbar .IF_btn_h2{background-position:0 -1230px}
+.toolbar .IF_btn_h2_on{background-position:0 -1230px}

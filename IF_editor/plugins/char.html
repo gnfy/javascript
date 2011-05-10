@@ -1,0 +1,716 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="robots" content="noindex, nofollow" />
+<style>
+#tabPanel{
+	float:none;
+	text-align:left;
+    width:480px;
+    height:276px;
+    background-color:#F1F1E3;
+}
+#tabContent {
+	height:276px;
+	width:380px;
+	overflow-y:auto;
+	float:left;
+    background:#FFFFFF;<!--EAEAD1-->
+}
+#tabContent div{
+	display: none;
+	height:276px;
+}
+#tabMenu{
+    margin-left:16px;
+	height:126px;
+	width:60px;
+	float:left;
+}
+#tabMenu div{
+	float:none;
+	display:block;
+	cursor:pointer;
+    width:60px;
+	text-align:center;
+	line-height:21px;
+	height:21px;
+	font:"宋体";
+	font-size:12px;
+}	
+.menuFocus{
+	background:#E8E8FD;
+}
+.menuDefault{
+	background:#FFFFFF;
+}
+#tabIconReview {
+    margin-top:40px;
+    width:40px;
+    padding:10px 0px;
+	border:1px solid #ddd;
+    text-align:center;
+    background:#FFFFFF;
+}
+#tabContent table {
+    display:none;
+	border-top:1px solid #ddd;
+    border-left:1px solid #ddd;
+}
+#tabContent td {
+	text-align:center;
+	width:30px;
+	height:30px;
+	background: #fff;
+	border-right: 1px solid #ddd; 
+    border-bottom: 1px solid #ddd; 
+	background:#f8fbfc;
+	font-size:14px;
+	line-height:30px;
+    cursor:pointer;
+}
+</style>
+<script type="text/javascript">
+    function InsertStr(str){
+    try{
+        var editor = parent.IFeditor;
+        editor.insertHTMLToIF(str);
+        editor.destroy_pop();
+    }catch(e){alert(e.message);}
+}
+function $G(id){	
+	return document.getElementById(id)
+};
+var last_show = 0;
+var switchTab = function(val) {
+
+    if (val != last_show) {
+        
+        $G('table'+last_show).style.display="none";
+        last_show = val;
+        
+    }
+    $G('table'+val).style.display="block";
+    
+}
+// 侦听事件
+function addEvent(type, fn) {
+    
+    var e = $G('tabContent');
+    if ( navigator.userAgent.indexOf('MSIE') > -1 ) {
+        e.attachEvent('on'+type, fn);
+    } else {
+        e.addEventListener(type,fn,false);
+    }
+}
+</script>
+</head>
+<body style="margin:0px; padding:8px; background-color:#F1F1E3;font-size:12px;">
+<div id="tabPanel">
+		<div id="tabContent">
+				
+                <table width="360"  id="table1" cellpadding="0" cellspacing="0">
+
+                    <tr>
+                        <td width="30" height="30">⒈</td>
+                        <td width="30">⒉</td>
+                        <td width="30">⒊</td>
+                        <td width="30">⒋</td>
+                        <td width="30">⒌</td>
+                        <td width="30">⒍</td>
+                        <td width="30">⒎</td>
+                        <td width="30">⒏</td>
+                        <td width="30">⒐</td>
+                        <td width="30">⒑</td>
+                        <td width="30">&nbsp;</td>
+                        <td width="30">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">⒒</td>
+                        <td>⒓</td>
+                        <td>⒔</td>
+                        <td>⒕</td>
+                        <td>⒖</td>
+                        <td>⒗</td>
+                        <td>⒘</td>
+                        <td>⒙</td>
+                        <td>⒚</td>
+                        <td>⒛</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">⑴</td>
+                        <td>⑵</td>
+                        <td>⑶</td>
+                        <td>⑷</td>
+                        <td>⑸</td>
+                        <td>⑹</td>
+                        <td>⑺</td>
+                        <td>⑻</td>
+                        <td>⑼</td>
+                        <td>⑽</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">⑾</td>
+                        <td>⑿</td>
+                        <td>⒀</td>
+                        <td>⒁</td>
+                        <td>⒂</td>
+                        <td>⒃</td>
+                        <td>⒄</td>
+                        <td>⒅</td>
+                        <td>⒆</td>
+                        <td>⒇</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">①</td>
+                        <td>②</td>
+                        <td>③</td>
+                        <td>④</td>
+                        <td>⑤</td>
+                        <td>⑥</td>
+                        <td>⑦</td>
+                        <td>⑧</td>
+                        <td>⑨</td>
+                        <td>⑩</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">㈠</td>
+                        <td>㈡</td>
+                        <td>㈢</td>
+                        <td>㈣</td>
+                        <td>㈤</td>
+                        <td>㈥</td>
+                        <td>㈦</td>
+                        <td>㈧</td>
+                        <td>㈨</td>
+                        <td>㈩</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">ⅰ</td>
+                        <td>ⅱ</td>
+                        <td>ⅲ</td>
+                        <td>ⅳ</td>
+                        <td>ⅴ</td>
+                        <td>ⅵ</td>
+                        <td>ⅶ</td>
+                        <td>ⅷ</td>
+                        <td>ⅸ</td>
+                        <td>ⅹ</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">Ⅰ</td>
+                        <td>Ⅱ</td>
+                        <td>Ⅲ</td>
+                        <td>Ⅳ</td>
+                        <td>Ⅴ</td>
+                        <td>Ⅵ</td>
+                        <td>Ⅶ</td>
+                        <td>Ⅷ</td>
+                        <td>Ⅸ</td>
+                        <td>Ⅹ</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td height="30">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+                <table width="360"  id="table0" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td width="30" height="30">、</td>
+                        <td width="30">。</td>
+                        <td width="30">·</td>
+                        <td width="30">ˉ</td>
+                        <td width="30">ˇ</td>
+                        <td width="30">¨</td>
+                        <td width="30">〃</td>
+                        <td width="30">々</td>
+                        <td width="30">—</td>
+                        <td width="30">～</td>
+                        <td width="30">‖</td>
+                        <td width="30">…</td>
+                    </tr>
+                    <tr>
+                        <td height="30">‘</td>
+                        <td>’</td>
+                        <td>“</td>
+                        <td>”</td>
+                        <td>〔</td>
+                        <td>〕</td>
+                        <td>〈</td>
+                        <td>〉</td>
+                        <td>《</td>
+                        <td>》</td>
+                        <td>「</td>
+                        <td>」</td>
+                    </tr>
+                    <tr>
+                        <td height="30">『</td>
+                        <td>』</td>
+                        <td>〖</td>
+                        <td>〗</td>
+                        <td>【</td>
+                        <td>】</td>
+                        <td>±</td>
+                        <td>×</td>
+                        <td>÷</td>
+                        <td>∶</td>
+                        <td>∧</td>
+                        <td>∨</td>
+                    </tr>
+                    <tr>
+                        <td height="30">∑</td>
+                        <td>∏</td>
+                        <td>∪</td>
+                        <td>∩</td>
+                        <td>∈</td>
+                        <td>∷</td>
+                        <td>√</td>
+                        <td>⊥</td>
+                        <td>∥</td>
+                        <td>∠</td>
+                        <td>⌒</td>
+                        <td>⊙</td>
+                    </tr>
+                    <tr>
+                        <td height="30">∫</td>
+                        <td>∮</td>
+                        <td>≡</td>
+                        <td>≌</td>
+                        <td>≈</td>
+                        <td>∽</td>
+                        <td>∝</td>
+                        <td>≠</td>
+                        <td>≮</td>
+                        <td>≯</td>
+                        <td>≤</td>
+                        <td>≥</td>
+                    </tr>
+                    <tr>
+                        <td height="30">∞</td>
+                        <td>∵</td>
+                        <td>∴</td>
+                        <td>♂</td>
+                        <td>♀</td>
+                        <td>°</td>
+                        <td>′</td>
+                        <td>″</td>
+                        <td>℃</td>
+                        <td>＄</td>
+                        <td>¤</td>
+                        <td>￠</td>
+                    </tr>
+                    <tr>
+                        <td height="30">￡</td>
+                        <td>‰</td>
+                        <td>§</td>
+                        <td>№</td>
+                        <td>☆</td>
+                        <td>★</td>
+                        <td>○</td>
+                        <td>●</td>
+                        <td>◎</td>
+                        <td>◇</td>
+                        <td>◆</td>
+                        <td>□</td>
+                    </tr>
+                    <tr>
+                        <td height="30">■</td>
+                        <td>△</td>
+                        <td>▲</td>
+                        <td>※</td>
+                        <td>→</td>
+                        <td>←</td>
+                        <td>↑</td>
+                        <td>↓</td>
+                        <td>〓</td>
+                        <td>〡</td>
+                        <td>〢</td>
+                        <td>〣</td>
+                    </tr>
+                    <tr>
+                        <td height="30">〤</td>
+                        <td>〥</td>
+                        <td>〦</td>
+                        <td>〧</td>
+                        <td>〨</td>
+                        <td>〩</td>
+                        <td>㊣</td>
+                        <td>㎎</td>
+                        <td>㎏</td>
+                        <td>㎜</td>
+                        <td>㎝</td>
+                        <td>㎞</td>
+                    </tr>
+                    <tr>
+                        <td height="30">㎡</td>
+                        <td>㏄</td>
+                        <td>㏎</td>
+                        <td>㏑</td>
+                        <td>㏒</td>
+                        <td>㏕</td>
+                        <td>℡</td>
+                        <td>↖</td>
+                        <td>↗</td>
+                        <td>↘</td>
+                        <td>↙</td>
+                        <td>℉</td>
+                    </tr>
+                </table>
+                <table width="360"  id="table2" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="30" height="30">А </td>
+                        <td width="30">Б</td>
+                        <td width="30">В</td>
+                        <td width="30">Г</td>
+                        <td width="30">Д</td>
+                        <td width="30">Е</td>
+                        <td width="30">Ё</td>
+                        <td width="30">Ж</td>
+                        <td width="30">З</td>
+                        <td width="30">И</td>
+                        <td width="30">Й</td>
+                        <td width="30"> К </td>
+                    </tr>
+                    <tr>
+                        <td height="30">Л </td>
+                        <td>М</td>
+                        <td>Н</td>
+                        <td>О</td>
+                        <td>П</td>
+                        <td>Р</td>
+                        <td>С</td>
+                        <td>Т</td>
+                        <td>У</td>
+                        <td>Ф</td>
+                        <td>Х</td>
+                        <td>Ц</td>
+                    </tr>
+                    <tr>
+                        <td height="30">Ч</td>
+                        <td>Ш</td>
+                        <td>Щ</td>
+                        <td>Ъ</td>
+                        <td>Ы</td>
+                        <td>Ь</td>
+                        <td>Э</td>
+                        <td>Ю</td>
+                        <td>Я</td>
+                        <td>а</td>
+                        <td>б</td>
+                        <td>в</td>
+                    </tr>
+                    <tr>
+                        <td height="30">г</td>
+                        <td>д</td>
+                        <td>е</td>
+                        <td>ё</td>
+                        <td>ж</td>
+                        <td>з</td>
+                        <td>и</td>
+                        <td>й</td>
+                        <td>к</td>
+                        <td>л</td>
+                        <td>м</td>
+                        <td>н</td>
+                    </tr>
+                    <tr>
+                        <td height="30">о </td>
+                        <td>п</td>
+                        <td>р</td>
+                        <td>с</td>
+                        <td>т</td>
+                        <td>у</td>
+                        <td>ф</td>
+                        <td>х</td>
+                        <td>ц</td>
+                        <td>ч</td>
+                        <td>ш</td>
+                        <td>щ</td>
+                    </tr>
+                    <tr>
+                        <td height="30">ъ</td>
+                        <td>ы</td>
+                        <td>ь</td>
+                        <td>э</td>
+                        <td>ю</td>
+                        <td>я</td>
+                        <td>Φ</td>
+                        <td>Χ</td>
+                        <td>Ψ</td>
+                        <td>Ω</td>
+                        <td>α</td>
+                        <td>β</td>
+                    </tr>
+                    <tr>
+                        <td height="30">γ</td>
+                        <td>δ</td>
+                        <td>ε</td>
+                        <td>ζ</td>
+                        <td>η</td>
+                        <td>θ</td>
+                        <td>ι</td>
+                        <td>κ</td>
+                        <td>λ</td>
+                        <td>μ</td>
+                        <td>ν</td>
+                        <td>ξ</td>
+                    </tr>
+                    <tr>
+                        <td height="30">ο</td>
+                        <td>π</td>
+                        <td>ρ</td>
+                        <td>σ</td>
+                        <td>τ</td>
+                        <td>υ</td>
+                        <td>φ</td>
+                        <td>χ</td>
+                        <td>ψ</td>
+                        <td>ω</td>
+                        <td>Γ</td>
+                        <td>Δ</td>
+                    </tr>
+                    <tr>
+                        <td height="30">Ε</td>
+                        <td>Ζ</td>
+                        <td>Η</td>
+                        <td>Θ</td>
+                        <td>Ι</td>
+                        <td>Κ</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+                <table width="360"  id="table3" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="30" height="30">ā </td>
+                        <td width="30">á</td>
+                        <td width="30">ǎ</td>
+                        <td width="30">à</td>
+                        <td width="30">&nbsp;</td>
+                        <td width="30">ō</td>
+                        <td width="30">ó</td>
+                        <td width="30">ǒ</td>
+                        <td width="30">ò</td>
+                        <td width="30">&nbsp;</td>
+                        <td width="30">&nbsp;</td>
+                        <td width="30">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">ē</td>
+                        <td>é</td>
+                        <td>ě</td>
+                        <td>è</td>
+                        <td>&nbsp;</td>
+                        <td>ī</td>
+                        <td>í</td>
+                        <td>ǐ</td>
+                        <td>ì</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">ū </td>
+                        <td>ú</td>
+                        <td>ǔ</td>
+                        <td>ù</td>
+                        <td>&nbsp;</td>
+                        <td>ǖ</td>
+                        <td>ǘ</td>
+                        <td>ǚ</td>
+                        <td>ǜ</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+    </div><!-- End tabContent-->
+	<div id="tabMenu">
+            <div id="tab0" onClick="switchTab(0)"><u>特殊符号</u></div>		
+            <div id="tab1" onClick="switchTab(1)"><u>数字符号</u></div>
+            <div id="tab2" onClick="switchTab(2)"><u>特殊字母</u></div>
+            <div id="tab3" onClick="switchTab(3)"><u>拼音符号</u></div>
+            <div id="tabIconReview" style="font-size:24px;font-weight:blod;"></div>
+    </div><!-- End tabMenu-->
+</div><!-- End tabPanel-->
+<!-- End tabIconReview-->
+<script type="text/javascript">
+	switchTab(0);
+    //$G("tabIconReview").style.display='none';
+    addEvent('mouseover', function(){
+        var e = arguments[0] || window.evnet, target = e.srcElement ? e.srcElement : e.target;
+        $G("tabIconReview").style.display='block';
+        var str = target.innerHTML;
+        if (str.length < 6 && str != '') {   // 过滤空格
+            $G("tabIconReview").innerHTML = target.innerHTML;
+        }
+    });
+    addEvent('mouseout', function() {
+        $G("tabIconReview").innerHTML = '';
+        $G("tabIconReview").style.display='none';
+    });
+    addEvent('click', function() {
+        var e = arguments[0] || window.evnet, target = e.srcElement ? e.srcElement : e.target;
+        var str = target.innerHTML;
+        if (str.length < 6 && str != '' ) {   // 过滤空格
+            InsertStr(target.innerHTML);
+        }
+    });
+</script>
+</body>
+</html>

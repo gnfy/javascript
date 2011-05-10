@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style>
+    a{color:#000;text-decoration:none;cursor:pointer}
+    .btn {
+        border:1px solid #B2DAFF;
+        color:#000;
+        width:100px;
+        cursor:pointer;
+    }
+    .btn_on {
+        border:1px solid #B2DAFF;
+        border-bottom:none;
+        font-weight:bold;
+        width:100px;
+        color:#000;
+        cursor:pointer;
+    }
+    .t_btn {
+        margin-top:8px;
+        height:30px;
+        line-height:30px;
+        width:100%;
+        text-align:center;
+    }
+</style>
+<script type="text/javascript">
+String.prototype.trim=function(){return this.replace(/(^[\s\t\xa0\u3000]+)|([\u3000\xa0\s\t]+$)/g, "")};
+String.prototype.getByteLength=function(){return this.replace(/[^\x00-\xff]/g, "mm").length;};
+
+TiImage = {
+    save_pic: function (){
+        try{
+
+            var editor = parent.IFeditor;
+            var img_tip = document.getElementById('if_img_tip');
+            var img_url = document.getElementById('if_img_url');
+            var img_loc = document.getElementById('if_img_local');
+            var img_value = '';
+            if ( img_loc.value ) {
+                img_value = img_loc.value.trim();
+            }
+            if ( img_url.value ) {
+                img_value = img_url.value.trim();
+		        img_value = img_value.replace(/^http:\/\/http:\/\//g, "http://");
+		        var urlexp = /^(https:\/\/|http:\/\/|ftp:\/\/|rtsp:\/\/|mms:\/\/)/;
+		        if(!(urlexp.test(img_value.toLowerCase()))){
+			        img_value = "http://" + img_value;
+                }
+            }
+		
+		    var lower_url = img_value.toLowerCase();
+            urlexp = /(.jpg|.jpeg|.bmp|.png|.gif)$/;
+		    if(!urlexp.test(lower_url)){
+			    img_tip.innerHTML = "请上传正确的图片，目前支持：jpg,jpeg,bmp,png,gif格式的图片";
+			    return false;
+            }
+            document.getElementById('f_t').style.display = 'none';
+            document.getElementById('img_notice').style.display = '';
+            document.getElementById('form').submit();
+        }catch(e){alert(e.message);}
+    },
+    change_pic:function(val){
+                   
+        for (var i = 1; i < 3; i++) {
+            var p = document.getElementById('pic_'+i);
+            var d = document.getElementById('btn_'+i);
+            if ( val == i ) {
+                p.style.display = '';
+                d.className = 'btn_on';
+            } else {
+                p.style.display = 'none';
+                d.className = 'btn';
+            }
+        }
+    }
+};
+</script>
+</head>
+<body style="margin:0;background-color:#FFFFFF;">
+    <div id="img_notice" style="z-index:999;text-align:center;margin-top:20px;display:none">
+        <div>图片上传中....</div>
+        <div><img src="../images/loader.gif" border="0" /></div>
+    </div>
+    <form action="../upload.php" id="form" enctype="multipart/form-data" method="post">
+        <div id="f_t">
+        <table class="t_btn" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="border-bottom:1px solid #B2DAFF;width:10px;">&nbsp;</td>
+                <td align="center" id="btn_1" class="btn_on" onclick="TiImage.change_pic(1)">本地图片</td>
+                <td style="width:10px;border-bottom:1px solid #B2DAFF;">&nbsp;</td>
+                <td align="center" id="btn_2" class="btn" onclick="TiImage.change_pic(2)">图片链接</td>
+                <td style="border-bottom:1px solid #B2DAFF;">&nbsp;</td>
+            </tr>
+        </table>
+    <table cellpadding="2" cellspacing="0" border="0"  style="margin:4px;font-size:12px">
+        <tr id="pic_2" style="display:none;">
+            <td>图片链接：</td>
+            <td><input type="text" name="if_img_url" id="if_img_url" style="width:335px"></td>
+        </tr>
+        <tr id="pic_1">
+            <td>本地图片：</td>
+            <td><input type="file" name="if_img_local" id="if_img_local" /></td>
+        </tr>
+        <tr>
+            <td width="70px">图片位置：</td>
+            <td width="340px"><input type="radio" name="if_img_pos" value="left" checked="true" />居左&nbsp;&nbsp;<input type="radio" name="if_img_pos" value="right" />居右</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="font-size:14px; color:#999;"><div style="margin-top:12px;">支持格式：jpg,gif,png,bmp</div>大小限制：3M</td>
+        </tr>
+        <tr><td colspan="2"><div id="if_img_tip" style="color:#ff0000;font-size:12px">&nbsp;</div></td></tr>
+        <tr><td colspan="2"><input type="button" onclick="return TiImage.save_pic()" name="insertAccept" id="insertAccept" value="插入图片"></td></tr>
+        </div>
+    </table>
+</form>
+</body>
+</html>

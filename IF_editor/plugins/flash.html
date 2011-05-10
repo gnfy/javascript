@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style>
+a{color:#261CDC}
+</style>
+<script type="text/javascript">
+String.prototype.trim=function(){return this.replace(/(^[\s\t\xa0\u3000]+)|([\u3000\xa0\s\t]+$)/g, "")};
+String.prototype.getByteLength=function(){return this.replace(/[^\x00-\xff]/g, "mm").length;};
+TiFlash = {
+	validAddrPrefixs : [
+		"http://img.ku6.com/common/V2.0.baidu.swf?vid=",
+
+		"http://www.tudou.com/v/",
+		"http://www.tudou.com/player/playlist.swf?lid=",
+		"http://www.56.com/",
+		"http://player.youku.com/",
+		"http://6.cn/",
+
+		"http://player.ku6.com/refer/",
+		"http://tv.mofile.com/cn/xplayer.swf?v=",
+		"http://v.blog.sohu.com/fo/v4/",
+		"http://v.blog.sohu.com/fo/p4/",
+		"http://vhead.blog.sina.com.cn/player/outer_player.swf?",
+
+		"http://img.openv.tv/hd/swf/hd_player.swf?pid=",
+		"http://www.cnboo.com/flash/player.swf?ids=",
+		"http://video.pomoho.com/swf/out_player.swf?flvid=",
+
+		"http://video.cctv.com/flash/cctv_player.swf?VideoID=",
+		"http://misc.home.news.cn/video/swf/VideoDisplay.swf?videoSource=",
+		"http://mv.baidu.com/export/flashplayer.swf?playlist=",
+		"http://mv.baidu.com/export/flashplayer.swf?vid=",
+		"http://client.joy.cn/flvplayer/",
+
+        "http://img01.taobaocdn.com/",
+
+        "http://www.ifeng.com/",    // 凤凰网
+        "http://v.ifeng.com/",
+        "http://vimg.ifeng.com/"
+	],
+    accept: function (){
+        try{
+            
+        var editor = parent.IFeditor;
+        var whiteList = this.validAddrPrefixs;
+		var isInWhiteList = function(url){
+			for(var i = 0, j = whiteList.length; i < j; i ++){
+				if(url.indexOf(whiteList[i]) == 0) return true;
+			}
+			return false;
+		}
+
+		var flash_url_value = document.getElementById('if_flash_url').value.trim().replace(/^http:\/\/http:\/\//g, "http://");
+		
+		var urlexp = /^(https:\/\/|http:\/\/|ftp:\/\/|rtsp:\/\/|mms:\/\/)/;
+		if(!(urlexp.test(flash_url_value.toLowerCase()))){
+			flash_url_value = "http://" + flash_url_value;
+		}
+		var lower_url = flash_url_value.toLowerCase();
+
+		if(lower_url.length <= 0 
+			|| lower_url == "https://" 
+			|| lower_url == "http://" 
+			|| lower_url == "ftp://"
+			|| lower_url == "rtsp://"
+			|| lower_url == "mms://"){
+
+			this.showError("视频链接不能为空");
+			return false;
+		}
+        urlexp = /(\.html|\.htm|\.shtml|\.xml|\.jpg|\.jpeg|\.bmp|\.png|\.gif|\.tif)$/;
+		if(urlexp.test(lower_url)){
+			this.showError("输入链接有误，请重试");
+			return false;
+		}
+		if(!isInWhiteList(flash_url_value)){
+			this.showError("对不起，您输入的视频链接无效，请重试");
+			return false;
+		}
+		flash_url_value = flash_url_value.replace(/(\&)?\w*auto\w*=[\w\d]+/ig,"");
+	    this.execute(editor, flash_url_value);
+        }catch(e){}
+        return false;
+	},
+	execute : function(editor, url){
+
+		var html = '';
+
+		var height=450, width=500;
+		if(url.toLowerCase().indexOf("baidu.com") > -1){// 百度
+			width = 480;
+			height = 410;
+		}else if(url.toLowerCase().indexOf("player.video.qiyi.com") > -1){// 奇异
+			width = 500;
+			height = 415;
+		}else{// 酷6等其他网站的视频
+			width = 500;
+			height = 450;
+		}
+        html = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0" height="'+width+'" width="'+height+'"><param name="quality" value="high" /><param name="movie" value="'+url+'" /><embed height="'+width+'" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="'+height+'" type="application/x-shockwave-flash" width="'+height+'"></embed></object>';
+        editor.insertHTMLToIF(html);
+		editor.destroy_pop();
+	},
+	onFocusInput : function(){
+		document.getElementById('if_flash_tip').innerHTML = "目前支持土豆、优酷、ku6等多家视频网站";
+		document.getElementById('if_flash_tip').style.color = "#666666";
+	},
+	showError : function(msg){
+		document.getElementById('if_flash_tip').innerHTML = msg;
+		document.getElementById('if_flash_tip').style.color = "#ff0000";
+	}
+};
+
+
+window.onload = function(){
+	var input = document.getElementById('if_flash_url');
+    input.focus();
+    var browser = parent.browser;
+    try{
+        if(browser.IE){
+			input.select();
+		}else{
+			input.setSelectionRange(0, input.value.length);
+		}
+	}catch(e){}
+};
+
+</script>
+</head>
+<body style="margin:0;background-color:#FFFFFF">
+<form action="" onSubmit="TiFlash.accept();return false"><table cellpadding="2" cellspacing="0" border="0"  style="margin:4px;font-size:12px">
+<tr><td width="70px">视频链接：</td><td width="330px"><input type="text" name="if_flash_url" id="if_flash_url" value="http://" style="width:325px" oncontextmenu="this.select()" onClick="this.select()" onFocus="TiFlash.onFocusInput()"></td></tr>
+<tr><td>&nbsp;</td><td><div id="if_flash_tip" style="font-size:12px">贴吧目前支持土豆、优酷、ku6等多家视频网站</div></td></tr>
+<tr><td colspan="3"><input type="submit" name="insertAccept" id="insertAccept" value="插入视频"></td></tr>
+</table></form>
+</body>
+</html>
