@@ -1,0 +1,12 @@
+<script>
+function get_zoom_pic(url, s) {
+    var size        = s || '150_100';
+    var len         = url.length;
+    var realname    = url.substring(0, url.lastIndexOf('.'));
+    var ext         = url.substring(url.lastIndexOf('.'), len);
+    alert(ext);
+    realname        = realname +'_'+ size + ext;
+    alert(realname);
+}
+get_zoom_pic('http://www.ifeng.com/1.jpg');
+</script>

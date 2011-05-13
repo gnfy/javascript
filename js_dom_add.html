@@ -1,0 +1,78 @@
+<html>  
+<head>  
+<title>js DOM插入与追加</title>  
+<script type="text/javascript">
+   /*使用appendChild创建结点*/  
+   function CreateNode(str)    
+   {  
+      //创建新div  
+      var NewDiv = document.createElement("div");   
+      //对div设置 id属性  
+        NewDiv.id = "dd";   
+      //创建div内加入的内容  
+      var NewText = document.createTextNode(str);  
+      //追加一个新的子结点  
+        NewDiv.appendChild(NewText);  
+      //返回新创建结点数据  
+      return NewDiv;                                  
+   }  
+   //向指定结点前插入新结点函数  
+   function AppBefore(nodeId, str)                      
+   {  
+      var node = document.getElementById(nodeId);  
+      var newNode = CreateNode(str);  
+      //如果存在双亲结点  
+      if(node.parentNode)                                
+      {  
+         //insertBefore(newchild,refchild)  说明：newchild(插入的新结点) refchild(将新结点插入到此结点前)  
+         node.parentNode.insertBefore(newNode, node);  
+      }  
+   }  
+   //向指定结点内插入新结点函数  
+   function insertWithin(nodeId, str)    
+   {    
+      //指定结点 id  
+      var node = document.getElementById(nodeId);  
+      var newNode = CreateNode(str);  
+      //追加一个新的结点  
+      node.appendChild(newNode);  
+   }  
+   //向指定结点后插入新结点函数  
+   function AppAfter(nodeId, str)      
+   {  
+      var node = document.getElementById(nodeId);  
+      var newNode = CreateNode(str);  
+      //如果存在上一级结点  
+      if(node.parentNode)      
+      {  
+         //如果存在下一子结点  
+         if(node.nextSibling)    
+         {  
+            // 在下一子结点前插入子结点  
+            node.parentNode.insertBefore(newNode, node.nextSibling);  
+         }else{  
+            // 如果没有下一子结点向后追加子结点  
+            node.parentNode.appendChild(newNode);  
+         }  
+      }  
+   }  
+</script>  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>  
+<body>  
+<h1><center> DOM JS 插入与追加</center></h1>  
+<hr>  
+<div style="background-clolor: #66ff00;" mce_style="background-clolor: #66ff00;">  
+   <div id="appendChild" style="background-color:#ffcc00;" mce_style="background-color:#ffcc00;"></div>  
+</div>  
+<hr>  
+<!--/star-->  
+<form id="form" name="form" action="#" method="get">  
+    <input type="text" id="files" name="files">  
+    <input type="button" value="指定结点前插入新结点" onClick="AppBefore('appendChild', document.form.files.value);">  
+    <input type="button" value="指定结点中插入新结点" onClick="insertWithin('appendChild', document.form.files.value);">  
+    <input type="button" value="指定结点后插入新结点" onClick="AppAfter('appendChild', document.form.files.value);">  
+</form>  
+<!--/enf-->  
+</body>  
+</html>
+
