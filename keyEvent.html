@@ -1,0 +1,99 @@
+<STYLE TYPE="text/css"> 
+TD {text-align:center} 
+</STYLE> 
+<SCRIPT LANGUAGE="JavaScript"> 
+function init() { 
+    document.onkeydown = showKeyDown 
+    document.onkeyup = showKeyUp 
+    document.onkeypress = showKeyPress 
+} 
+
+function showKeyDown(evt) { 
+    evt = (evt) ? evt : window.event 
+    document.getElementById("pressKeyCode").innerHTML = 0 
+    document.getElementById("upKeyCode").innerHTML = 0 
+    document.getElementById("pressCharCode").innerHTML = 0 
+    document.getElementById("upCharCode").innerHTML = 0 
+    restoreModifiers("") 
+    restoreModifiers("Down") 
+    restoreModifiers("Up") 
+    document.getElementById("downKeyCode").innerHTML = evt.keyCode 
+    if (evt.charCode) { 
+        document.getElementById("downCharCode").innerHTML = evt.charCode 
+    } 
+    showModifiers("Down", evt) 
+} 
+function showKeyUp(evt) { 
+    evt = (evt) ? evt : window.event 
+    document.getElementById("upKeyCode").innerHTML = evt.keyCode 
+    if (evt.charCode) { 
+        document.getElementById("upCharCode").innerHTML = evt.charCode 
+    } 
+    showModifiers("Up", evt) 
+    return false 
+} 
+function showKeyPress(evt) { 
+    evt = (evt) ? evt : window.event 
+    document.getElementById("pressKeyCode").innerHTML = evt.keyCode 
+    if (evt.charCode) { 
+        document.getElementById("pressCharCode").innerHTML = evt.charCode 
+    } 
+    showModifiers("", evt) 
+    return false 
+} 
+function showModifiers(ext, evt) { 
+    restoreModifiers(ext) 
+    if (evt.shiftKey) { 
+        document.getElementById("shift" + ext).style.backgroundColor = "#ff0000" 
+    } 
+    if (evt.ctrlKey) { 
+        document.getElementById("ctrl" + ext).style.backgroundColor = "#00ff00" 
+    } 
+    if (evt.altKey) { 
+        document.getElementById("alt" + ext).style.backgroundColor = "#0000ff" 
+    } 
+} 
+function restoreModifiers(ext) { 
+    document.getElementById("shift" + ext).style.backgroundColor = "#ffffff" 
+    document.getElementById("ctrl" + ext).style.backgroundColor = "#ffffff" 
+    document.getElementById("alt" + ext).style.backgroundColor = "#ffffff" 
+} 
+</SCRIPT> 
+</HEAD> 
+
+<BODY onLoad="init()"> 
+<H1>Keyboard Event Handler Lab</H1> 
+<HR> 
+<FORM> 
+<TABLE BORDER=2 CELLPADDING=2> 
+<TR><TH></TH><TH>onKeyDown</TH><TH>onKeyPress</TH><TH>onKeyUp</TH></TR> 
+<TR><TH>Key Codes</TH> 
+    <TD ID="downKeyCode">0</TD> 
+    <TD ID="pressKeyCode">0</TD> 
+    <TD ID="upKeyCode">0</TD> 
+
+</TR> 
+<TR><TH>Char Codes (IE5/Mac; NN6)</TH> 
+    <TD ID="downCharCode">0</TD> 
+    <TD ID="pressCharCode">0</TD> 
+    <TD ID="upCharCode">0</TD> 
+</TR> 
+<TR><TH ROWSPAN=3>Modifier Keys</TH> 
+    <TD><SPAN ID="shiftDown">Shift</SPAN></TD> 
+    <TD><SPAN ID="shift">Shift</SPAN></TD> 
+    <TD><SPAN ID="shiftUp">Shift</SPAN></TD> 
+
+</TR> 
+<TR> 
+    <TD><SPAN ID="ctrlDown">Ctrl</SPAN></TD> 
+    <TD><SPAN ID="ctrl">Ctrl</SPAN></TD> 
+    <TD><SPAN ID="ctrlUp">Ctrl</SPAN></TD> 
+</TR> 
+<TR> 
+    <TD><SPAN ID="altDown">Alt</SPAN></TD> 
+    <TD><SPAN ID="alt">Alt</SPAN></TD> 
+    <TD><SPAN ID="altUp">Alt</SPAN></TD> 
+</TR> 
+
+</TABLE> 
+</FORM> 
