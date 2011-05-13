@@ -93,7 +93,7 @@
                                     if (i > 0 && i < y_max && j > 0 && j < x_max) {
                                         addEvent(div, 'click', bind(div, click_div, [i, j]));
                                         data[i][j] = 1;
-                                        div.style.cssText = 'float:left;width:40px;height:50px;';
+                                        div.style.cssText = 'cursor:pointer;float:left;width:40px;height:50px;';
                                     } else {
                                         data[i][j] = 0;
                                         div.style.cssText = 'float:left;width:40px;height:50px';
@@ -634,6 +634,19 @@
                         }
                     }
                     return ret = i == 0 ? false : arr;
+                }
+                window.onload = function () {
+                    G('y_name').focus();
+                    addEvent(G('y_name'), 'keypress', function(evt){
+                            if (evt.keyCode == 13) {
+                                G('o_name').focus();
+                            }
+                            });
+                    addEvent(G('o_name'), 'keypress', function(evt){
+                            if (evt.keyCode == 13) {
+                            start();
+                            }
+                            });
                 }
                 return {start:start, reDraw:createUI}
                 })();
