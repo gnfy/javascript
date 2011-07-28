@@ -153,7 +153,30 @@ var IF_ajax = (function(){
         xmlhttp = null;
     }
     /**
+     * 动态加载js
+     * 
+     * @param   string      url     链接地址
+     */
+    function loadScript(url) {
+        // 加载失败
+        var isload  = 1;
+        var ahead   = document.head || document.getElementsByTagName( "head" )[0] || document.documentElement;
+        var ascript = document.createElement('script');
+        ascript.src = url;
+        ascript.type= 'text/javascript';
+        ahead.appendChild(ascript);
+        ascript.onload = ascript.onreadystatechange = function() {
+            if( !ascript.readyState || /loaded|complete/.test( ascript.readyState ) ) {
+                isload = 2;
+                ahead.removeChild(ascript);
+            }
+        }
+        if (isload == 2) {
+            alert('加载失败....');
+        }
+    }
+    /**
      * 调用
      */
-    return {request:request}
+    return {request: request, loadScript: loadScript}
 })();
