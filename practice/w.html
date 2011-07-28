@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>动画效果</title>
+        <script type="text/javascript" src="jquery-1.5.1.js"></script>
+        <style type="text/css">
+            .show {
+                width:600px;
+                height:220px;
+                border:1px solid;
+            }
+        </style>
+        <script type="text/javascript">
+            var dom, org_w, org_h, timer;
+            function show(id, val) {
+                dom = document.getElementById(id);
+                var css = getCss(dom, 'display');
+                if ( css == 'none' ) {
+                    dom.style.display  = 'block';
+                    dom.style.overflow = 'hidden';
+                    org_h   = dom.clientHeight;
+                    org_w   = dom.clientWidth;
+                    var n_w = 0;
+                    var n_h = 0;
+                    dom.style.width = n_w + 'px';
+                    dom.style.height= n_h + 'px';
+                    animate(org_w, org_h, val, 1);
+                }
+            }
+            function animate(width, height, t, type) {
+                var o_w = dom.clientWidth;
+                var o_h = dom.clientHeight;
+                type    = type || 1;
+                if ( o_w != width || o_h != height ) {
+                    var n_w = 0.9 * o_w + width * 0.1;
+                    var n_h = 0.9 * o_h + height * 0.1;
+                    if ( type == 1 ) {
+                        n_w = Math.ceil(n_w);
+                        n_h = Math.ceil(n_h);
+                    } else {
+                        n_w = Math.floor(n_w);
+                        n_h = Math.floor(n_h);
+                    }
+                    dom.style.width = n_w + 'px';
+                    dom.style.height= n_h + 'px';
+                    timer = setTimeout("animate("+width+","+height+","+(t*0.9)+","+type+")", t * 0.1);
+                } else {
+                    if ( type == 2 ) {
+                        dom.style.display   = 'none';
+                        dom.style.width     = org_w + 'px';
+                        dom.style.height    = org_h + 'px';
+                    }
+                    dom.style.overflow        = '';
+                    clearTimeout(timer);
+                }
+            }
+            function hide(id, val) {
+                dom     = document.getElementById(id);
+                var css = getCss(dom, 'display');
+                if ( css != 'none' ) {
+                    dom.style.overflow = 'hidden';
+                    org_h   = dom.clientHeight;
+                    org_w   = dom.clientWidth;
+                    animate(0, 0, val, 2);
+                }
+            }
+            /**
+             * 获得对象的样式
+             * 
+             * @param    object    dom        要获得样式的对象
+             * @param    string    val        要获得样式的名称
+             * @return    mix                获得的内容
+             */
+            function getCss( dom, val ) {
+                var css = dom.currentStyle || document.defaultView.getComputedStyle(dom,null);
+                if ( val ) {
+                    css = css[val];
+                }
+                return css;
+            }
+        </script>
+   </head>
+   <body>
+        <div>
+            <input type="button" value="显示" onclick="show('show', 800)"/>&nbsp;&nbsp;
+            <input type="button" value="隐藏" onclick="hide('show', 800)"/>
+        </div>
+        <div class="show" id="show" style="display:none;">
+            <div><img src="http://img.tech.ifeng.com/app/product/65_280x210/999/ceCSoRai7ioVY.jpg" id="show_2"/></div>
+        </div>
+   </body>
+</html>
