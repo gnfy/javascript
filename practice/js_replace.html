@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    var str = 'A&B&C'
+    str = str.replace(/(A|B|C)/g, function (x) {
+      return {"A": "asdf", "B": "fdsa", "C": "......"}[x]
+    });
+alert(str);
+
+var str = "爱情99999电话";
+str = str.replace(/(爱情|电话|思恋)/g,"http://www.baidu.com/s?wd=$1"); 
+alert(str);
+
+var str = "1爱情2爱情3爱情4爱情99电话1爱情2爱情3爱情4爱情"; 
+var i=0
+str = str.replace(/爱情/g,function(x){
+        if (i == 3) {
+            i = 0;
+            return 'xx';
+        } else {
+            i++;
+            return x;
+        }
+        //return ++i==4 ? "xx":x
+        }); 
+alert(str) 
+
+</script>

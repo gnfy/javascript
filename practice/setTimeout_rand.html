@@ -1,0 +1,17 @@
+<script type="text/javascript">
+    var rand_arr    = [];
+    var max_len     = 10000000;
+    var time_max    = max_len / 100;
+    //alert(parseInt(Math.random()*100));
+    function begin_rand() {
+        for (var i = 0; i < time_max; i++) {
+            rand_arr.push(parseInt(Math.random()*100));
+        }
+        if (rand_arr.length < max_len) {
+            setTimeout(begin_rand, 0);
+        } else {
+            alert('complete');
+        }
+    }
+    begin_rand();
+</script>
