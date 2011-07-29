@@ -1,7 +1,7 @@
 /**
  * 常用js方法封装类
  *
- * Last modify: 2011-06-23 15:29:14
+ * Last modify: 2011-07-29 15:37:12
  *
  * example:
  * IF_common.GTN(name, [dom])    获得元素name为name的对象
