@@ -1,3 +1,12 @@
+/**
+ * 常用js方法封装类
+ *
+ * Last modify: 2011-06-23 15:29:14
+ *
+ * example:
+ * IF_common.GTN(name, [dom])    获得元素name为name的对象
+ *                              若要限制指定容器内的，dom为容器的对象
+ */
 var IF_common = {
     /**
      * 根据标签获得对象
@@ -43,7 +52,7 @@ var IF_common = {
             css = css[val];
         }
         return css;
-    }
+    },
     /**
      * 创建元素
      *
@@ -304,17 +313,144 @@ var IF_common = {
      * @param   int     t       滚动时间
      */
     scrollPageTop: function (val, t) {
-        var t_top = this.getScrollTop();
+        var self    = this;
+        var t_top   = self.getScrollTop();
         if ( t_top != val ) {
             var t_val   = val - t_top;
             var step    = Math.ceil( t_top + ( t_val * 0.1 ) );
             window.scrollTo( 0, step );
-            var timer   = setTimeout('IF_common.scrollPageTop('+val+', '+(t*0.9)+')', t * 0.1 );
+            var timer   = setTimeout( function() { self.scrollPageTop(val, t * 0.9) }, t * 0.1 );
         } else {
             clearTimeout(timer);
         }
+    },
+    /**
+     * 动画效果
+     *
+     * @param   object  obj         参数对象
+     *                  obj.dom     动画效果的对象
+     *                  obj.from    对象的原尺寸, obj.from.w 宽度, obj.from.h 高度
+     *                  obj.to      对象要变化的尺寸, obj.to.w 宽度, obj.to.h 高度
+     *                  obj.time    动画效果的时间, 默认 600 = 0.6 秒
+     *                  obj.type    动画效果的类型, 默认 show, 显示
+     */
+    animate: function (obj) {
+        var self    = this;
+        var dom     = obj.dom;
+        var from    = obj.from  || '';
+        var to      = obj.to    || '';
+        var time    = obj.time  || 600;
+        var type    = obj.type  || 'show';
+        var o_w     = dom.clientWidth;
+        var o_h     = dom.clientHeight;
+        var t_w     = typeof (to.w) == 'undefined' ? o_w : to.w;
+        var t_h     = typeof (to.h) == 'undefined' ? o_h : to.h;
+        if ( o_w != t_w || o_h != t_h ) {
+            if ( o_w != t_w ) {
+                var n_w = 0.9 * o_w + t_w * 0.1;
+                n_w = type == 'show' ? Math.ceil(n_w) : Math.floor(n_w);
+                dom.style.width = n_w + 'px';
+            }
+            if ( o_h != t_h ) {
+                var n_h = 0.9 * o_h + t_h * 0.1;
+                n_h = type == 'show' ? Math.ceil(n_h) : Math.floor(n_h);
+                dom.style.height= n_h + 'px';
+            }
+            var param = {'dom':dom, 'from':from, 'to':to, 'time': time * 0.9, 'type': type};
+            setTimeout(function(){ self.animate(param) }, time * 0.1);
+        } else {
+            if ( type == 'hide' ) {
+                dom.style.display   = 'none';
+                var org_w           = obj.from.w;
+                var org_h           = obj.from.h;
+                dom.style.width     = org_w + 'px';
+                dom.style.height    = org_h + 'px';
+            }
+        }
+    },
+    /**
+     * 元素显示
+     *
+     * @param   mix     id      元素ID或对象
+     * @param   int     time    时间
+     */
+    show: function (id, time) {
+        var dom = typeof( id ) == 'object' ? id : document.getElementById(id);
+        var css = this.getCss(dom, 'display');
+        time    = time || 0;
+        if ( time > 0 ) {
+            if ( css == 'none' ) {
+                dom.style.display   = 'block';
+                var org_h           = dom.clientHeight;
+                var org_w           = dom.clientWidth;
+                dom.style.width     = '0px';
+                dom.style.height    = '0px';
+                this.animate({'dom':dom, 'to':{'w': org_w, 'h': org_h}, 'time': time, 'type': 'show'});
+                var child   = dom.childNodes;
+                var max     = child.length;
+                for ( var i = 0; i < max; i++ ) {
+                    if ( child[i].nodeType == 1 ) {
+                        this.show(child[i], time);
+                    }
+                }
+            } else if ( typeof(id) == 'object' ) {
+                var org_h           = dom.clientHeight;
+                var org_w           = dom.clientWidth;
+                dom.style.width     = '0px';
+                dom.style.height    = '0px';
+                this.animate({'dom':dom, 'to':{'w': org_w, 'h': org_h}, 'time': time, 'type': 'show'});
+                var child   = dom.childNodes;
+                var max     = child.length;
+                for ( var i = 0; i < max; i++ ) {
+                    if ( child[i].nodeType == 1 ) {
+                        this.show(child[i], time);
+                    }
+                }
+            }
+        } else {
+            if ( css == 'none' ) {
+                dom.style.display   = 'block';
+            }
+        }
+    },
+    /**
+     * 元素隐藏
+     *
+     * @param   mix     id      元素ID或对象
+     * @param   int     time    时间
+     */
+    hide: function (id, time) {
+        var dom = typeof( id ) == 'object' ? id : document.getElementById(id);
+        var css = this.getCss(dom, 'display');
+        time    = time || 0;
+        if ( time > 0 ) {
+            if ( css != 'none' ) {
+                var child   = dom.childNodes;
+                var max     = child.length;
+                for ( var i = 0; i < max; i++ ) {
+                    if ( child[i].nodeType == 1 ) {
+                        this.hide(child[i], time);
+                    }
+                }
+                var org_h   = dom.clientHeight;
+                var org_w   = dom.clientWidth;
+                this.animate({'dom':dom, 'from':{'w': org_w, 'h': org_h}, 'to':{'w': 0, 'h': 0}, 'time': time, 'type': 'hide'});
+            } else if ( typeof(id) == 'object' ) {
+                var child   = dom.childNodes;
+                var max     = child.length;
+                for ( var i = 0; i < max; i++ ) {
+                    if ( child[i].nodeType == 1 ) {
+                        this.hide(child[i], time);
+                    }
+                }
+                var org_h   = dom.clientHeight;
+                var org_w   = dom.clientWidth;
+                this.animate({'dom':dom, 'from':{'w': org_w, 'h': org_h}, 'to':{'w': 0, 'h': 0}, 'time': time, 'type': 'hide'});
+            }
+        } else {
+            dom.style.display = 'none';
+        }
     }
-
 };
 
 /**

@@ -48,9 +48,11 @@
                 var type    = obj.type  || 'show';
                 var o_w     = dom.clientWidth;
                 var o_h     = dom.clientHeight;
-                if ( o_w != to.w || o_h != to.h ) {
-                    var n_w = 0.9 * o_w + to.w * 0.1;
-                    var n_h = 0.9 * o_h + to.h * 0.1;
+                var t_w     = typeof (to.w) == 'undefined' ? o_w : to.w;
+                var t_h     = typeof (to.h) == 'undefined' ? o_h : to.h;
+                if ( o_w != t_w || o_h != t_h ) {
+                    var n_w = 0.9 * o_w + t_w * 0.1;
+                    var n_h = 0.9 * o_h + t_h * 0.1;
                     if ( type == 'show' ) {
                         n_w = Math.ceil(n_w);
                         n_h = Math.ceil(n_h);
