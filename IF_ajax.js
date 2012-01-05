@@ -1,7 +1,7 @@
 /**
  * ajax 封装类
  *
- * Last modify: 2011-05-21 16:12:02
+ * Last modify: 2011-05-21 18:00:00
  *
  * example：
  * IF_ajax.request({
