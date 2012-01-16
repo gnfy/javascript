@@ -1,0 +1,88 @@
+@charset "utf-8";
+/*顶部菜单*/
+body{width:100%;height:100%;margin:0 auto;font-family:'微软雅黑'}
+a{text-decoration: none; color:#666}
+.photo {position:absolute;z-index:200;background:#fff;margin:0 auto;overflow:auto;font-size:12px;}
+.photo_cover {z-index:100;background:#ccc;filter:alpha(opacity=80);opacity:0.8;position:absolute;margin:0 auto;scroll:auto;font-size:12px;}
+.main {margin:0 auto;width:80%;margin-top:15px;}
+.top_menu {height:38px;border:1px solid #ddd;text-align:center;background:#7cc;border:1px solid #7cc;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;color:#fff}
+.top_menu span {margin-left:20px;line-height:38px;cursor:pointer;font-size:18px;padding:2px 10px;}
+.current {background:#fff;border:1px solid #fff;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;color:#000}
+.content {margin:0 auto;margin-top:10px;text-align:center;position:relative}
+.content .col {width:240px;position:absolute; margin-bottom:20px;transition:top 1s, left 1s;-webkit-transition:top 1s, left 1s;-moz-transition:top 1s, left 1s; -o-transition:top 1s, left 1s}
+.content .col .desc {width:205px;border:1px solid #ddd;padding:6px;font-size:12px;text-align:left;box-shadow:4px 4px 4px #ddd;}
+.content .col .desc .see {position:absolute;display:none;}
+.content .col .desc .forward {text-align:right;padding-right:10px;line-height:28px;}
+.loading {text-align:center;background:#ddd;padding:10px 0px;margin-bottom:10px;}
+@keyframes col_an0 {
+    0%  {left:-480px;opacity:0}
+    20% {left:0px}
+}
+@-webkit-keyframes col_an0 {
+    0%  {opacity:0;-webkit-transform:rotateY(180deg)}
+    20% {left:0px;-webkit-transform:rotateY(0deg)}
+}
+@-moz-keyframes col_an0 {
+    0%  {opacity:0;}
+    20% {left:0px}
+}
+@keyframes col_an1 {
+    0%  {opacity:0}
+    20% {left:0px;opacity:0}
+    40% {left:240px}
+}
+@-webkit-keyframes col_an1 {
+    0%  {opacity:0}
+    20% {left:0px;opacity:0;-webkit-transform:rotateY(180deg)}
+    40% {left:240px;-webkit-transform:rotateY(0deg)}
+}
+@-moz-keyframes col_an1 {
+    0%  {opacity:0}
+    20% {left:0px;opacity:0}
+    40% {left:240px}
+}
+@keyframes col_an2 {
+    0%  {opacity:0}
+    40% {left:240px;opacity:0}
+    60% {left:480px}
+}
+@-webkit-keyframes col_an2 {
+    0%  {opacity:0}
+    40% {left:240px;opacity:0;-webkit-transform:rotateY(180deg)}
+    60% {left:480px;-webkit-transform:rotateY(0deg)}
+}
+@-moz-keyframes col_an2 {
+    0%  {opacity:0}
+    40% {left:240px;opacity:0}
+    60% {left:480px}
+}
+@keyframes col_an3 {
+    0%  {opacity:0}
+    60% {left:480px;opacity:0}
+    80% {left:720px}
+}
+@-webkit-keyframes col_an3 {
+    0%  {opacity:0}
+    60% {left:480px;opacity:0;-webkit-transform:rotateY(180deg)}
+    80% {left:720px;-webkit-transform:rotateY(0deg)}
+}
+@-moz-keyframes col_an3 {
+    0%  {opacity:0}
+    60% {left:480px;opacity:0}
+    80% {left:720px}
+}
+@keyframes col_an4 {
+    0%   {opacity:0}
+    80%  {left:720px;opacity:0}
+    100% {left:960px}
+}
+@-webkit-keyframes col_an4 {
+    0%   {opacity:0}
+    80%  {left:720px;opacity:0;-webkit-transform:rotateY(180deg)}
+    100% {left:960px;-webkit-transoform:rotateY(0deg)}
+}
+@-moz-keyframes col_an4 {
+    0%   {opacity:0}
+    80%  {left:720px;opacity:0}
+    100% {left:960px}
+}
