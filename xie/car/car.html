@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>商品一览</title>
+<style type="text/css">
+	*{ margin:0px; padding:0px; font-size:12px; }
+    a{cursor:pointer;}
+	#goods{margin:auto;width:980px; height:auto;}
+	h1{font-size:24px; padding-top:10px; padding-bottom:20px; border-bottom:1px solid #000;}
+	.main{padding:30px 20px; border-bottom:1px solid #00f;}
+	
+	.search{text-align:right; padding:10px;20px;}
+	.search a{ padding:6px 15px; font-size:12px;  text-decoration:none; font-weight:100; color:#f00;  padding-top:20px; cursor:pointer;}
+	.search a:hover{color:#00f;}
+
+	.title1,.title2{float:left; width:150px; text-align:center; }
+	.content{padding:10px 20px; border-bottom:dashed 1px #C30;}
+	.title2{padding-top:40px; font-size:14px; }
+	.count{font-size:14px; font-weight:bold; float:left;}
+	.count font{font-size:18px; color:#F00;}
+	.button{text-align:center; padding:10px; float:right;}
+	.button a{ padding:6px 15px; background-color:#CF0; font-size:14px;  text-decoration:none; font-weight:bold; color:#f00; border:1px solid #f00;}
+	.button a:hover{background-color:#0FF;}
+</style>
+
+<script type="text/javascript" src="js/car2.js"></script>
+<script type="text/javascript">
+    var cars = new car({});
+	window.onload = function(){
+		get_goods();
+	}
+    function get_goods(){
+        var data = cars.getGoods();
+		var html = '';
+		if(data != false){
+			for(var i in data){
+				html += '<div class="content">';
+				html += '<div class="title1"><img src="images/'+data[i].img+'"  /></div>';
+				html += '<div class="title2">'+data[i].name+'</div>';
+				html += '<div class="title2">￥'+data[i].price+'</div>';
+				html += '<div class="title2">'+data[i].num+'</div>';
+				html += '<div class="title2">￥'+data[i].price*data[i].num+'</div>';
+				html += '<div class="title2"><a onclick="update_show(this,\''+data[i].id+'\')">修改</a> <a onclick="del_goods(\''+data[i].id+'\')">删除</a></div>';
+				html += '<div style="clear:both"></div>';
+				html += '</div>';
+			}
+            
+		}else{
+			html += '<div class="content">';
+			html += '<p align="center" style="line-height:40px;"><b style="font-size:24px;color:#00f;">您还没有购物！！！</b></p>';
+			html += '</div>';
+		}
+        getPrice();
+		document.getElementById('car_content').innerHTML = html;
+    }
+	function update_show(obj,id){
+		var div1 = obj.parentNode.parentNode.getElementsByTagName('div')[2];
+		var div2 = obj.parentNode.parentNode.getElementsByTagName('div')[3];
+		var div3 = obj.parentNode.parentNode.getElementsByTagName('div')[4];
+		var input = document.createElement('input');
+		input.size = 3;
+		input.value = div2.innerHTML;
+		div2.innerHTML = '';
+		div2.appendChild(input);
+		input.select();
+		input.onblur = function(){
+            if(isNaN(this.value)){
+                alert('数量不能为非数字！');
+                return false;
+            }
+			var price = div1.innerHTML.replace('￥','');
+			var count = parseInt(price)* parseInt(this.value);
+			div3.innerHTML = '￥'+count;
+			div2.innerHTML = parseInt(this.value);
+            cars.updateGoods(id,parseInt(this.value));
+            getPrice();
+		}
+		
+	}
+
+    function getPrice(){
+        var data = cars.getGoods();
+        var sum = 0;
+        if(data !== false){
+            for(var i in data){
+                sum += parseInt(data[i].price)*parseInt(data[i].num);
+            }
+        }
+        document.getElementById('price').innerHTML = sum;
+    }
+
+    function del_goods(id){
+        if(id > 0){
+            cars.delGoods(id);
+        }else{
+            cars.delAllGoods();
+        }
+        get_goods();
+    }
+  
+</script>
+</head>
+
+<body>
+<div id="goods">
+	<h1 align="center">我的购物车
+    </h1>
+    <div class="search">
+    	<a href="goods.html">返回购物</a>
+    </div>
+    <div class="main">
+    	<div class="title1"><b>商品</b></div>
+    	<div class="title1"><b>商品名称</b></div>
+    	<div class="title1"><b>商品价格</b></div>
+    	<div class="title1"><b>商品总数</b></div>
+    	<div class="title1"><b>小计</b></div>
+    	<div class="title1"><b>操作</b></div>
+        <div style="clear:both"></div>
+    </div>
+    <div id="car_content">
+        <p align="center" style="line-height:40px;">
+            <b style="font-size:24px;color:#00f;">
+                您还没有购物！！！
+            </b>
+        </p>
+    </div>
+    <div class="main">
+    	<div class="count">总计：￥<font id="price">0.0</font></div>
+        <div class="button">
+        	<a onclick="del_goods(0)">清空购物车</a>
+        	<a href="car.php">结算中心</a>
+        	<a href="goods.html">继续购物</a>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+</div>
+</body>
+</html>
