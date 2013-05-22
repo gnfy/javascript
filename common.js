@@ -105,7 +105,6 @@
              */
             getChildNodes : function(_dom) {
                 var _ele = new Array(), _dom = _dom || window.document.body;
-
                 /**
                  * 获得子节点
                  *
