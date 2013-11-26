@@ -1,0 +1,114 @@
+<script charset="utf-8" type='text/javascript'>
+function changeimg(str) {
+	if(typeof str === "object") {
+	    str = str.target.result; // file reader
+	}
+    dImg.src = str;
+}
+
+function checkImageFile(i, obj, w, h, z) 
+{
+    $("view_message_" + i).innerHTML = '';
+    $("view_del_" + i).style.display = 'block';
+    checkImageFileNone(i);
+    var dFile = $(obj.id);
+    if ($('view_img_' + i)) {
+        $('view_img_' + i).style.display = 'block';
+         dImg = $('view_img_' + i);
+    }
+    if ($('p_view_img_' + i))
+         dImg = $('p_view_img_' + i);
+    if (!dFile.value.match(/.jpg|.gif|.png|.bmp/i)) 
+    {
+        $("view_message_" + i).innerHTML = '抱歉图片格式错误,请阅读上传说明';
+        checkImageFileNone(i);
+        return false;
+    }
+    if (dFile.files) {
+    	if(dFile.files[0].getAsDataURL){
+        	dImg.src = dFile.files[0].getAsDataURL();
+    	} else {
+    		//兼容非ie浏览器
+    		//参考 http://jsfiddle.net/fKQDL/
+    		var file = dFile.files[0];
+    		var fr = new FileReader;
+    		fr.onload = changeimg;
+    		fr.readAsDataURL(file);
+    	}
+    } 
+    else 
+    {
+        if (isIE6) {
+            var img = new Image();
+            img.onload = function() 
+            {
+                var size = Math.round(this.fileSize / 1024);
+                if (size > (z * 1024)) 
+                {
+                    $("view_message_" + i).innerHTML = '图片<span style="color:#00F">' + size + 'KB</span>,超过最大允许限制';
+                    checkImageFileNone(i);
+                    return false;
+                }
+                if (img.height < h && img.width < w) 
+                {
+                    $("view_message_" + i).innerHTML = '图片宽高不能小于<span style="color:#00F;float:none;">' + w + '*' + h + '</span>,请重新上传！';
+                    checkImageFileNone(i);
+                }
+                if ($('view_img_' + i)) {
+                    $('view_img_' + i).style.display = 'block';
+                    $('view_img_' + i).firstChild.src = obj.value;
+                }
+                if ($('p_view_img_' + i))
+                    $('p_view_img_' + i).src = obj.value;
+                $("pic" + i).style.display = 'none';
+                dImg.style.display = 'block';
+            }
+            img.src = dFile.value;
+        }
+        if (isIE7 || (img.height == 30 && img.width == 28) || (img.height == 0 && img.width == 0)) 
+        {
+            var newPreview = $('pic' + i);
+            newPreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dFile.value;
+            $("pic" + i).style.display = 'block';
+            dImg.style.display = 'none';
+        }
+        if (isIE7) 
+        {
+            $('img_hidden' + i).filters.item("DXImageTransform.Microsoft.AlphaImageLoader").sizingMethod = 'image';
+            $('img_hidden' + i).style.minHeight = h + 'px';
+            $('img_hidden' + i).style.minWidth = w + 'px';
+            try 
+            {
+                $('img_hidden' + i).filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dFile.value;
+                imgwidth = $('img_hidden' + i).offsetWidth;
+                imgheight = $('img_hidden' + i).offsetHeight;
+                if (imgheight < h && imgwidth < w) 
+                {
+                    $("view_message_" + i).innerHTML = '图片宽高不能小于<span style="color:#00F;float:none;">' + w + '*' + h + '</span>,请重新上传！';
+                    checkImageFileNone(i);
+                    return false;
+                }
+            } catch (e) {
+                alert('无效的图片文件。');
+                w = 0;
+                h = 0;
+                return;
+            }
+        }
+    }
+    if ($('view_text_' + i))
+        $('view_text_' + i).style.display = 'block';
+    if ($('view_textarea_' + i)) 
+    {
+        $('view_textarea_' + i).style.display = 'block';
+        if ($('view_textarea_' + i).getElementsByTagName('textarea')[0]) 
+        {
+            $('view_textarea_' + i).getElementsByTagName('textarea')[0].focus();
+            $('view_textarea_' + i).getElementsByTagName('textarea')[0].onblur = function() {
+                if (!$('view_textarea_' + i).getElementsByTagName('textarea')[0].value)
+                    $('view_textarea_' + i).style.display = 'none';
+            }
+        }
+    }
+}
+</script>
